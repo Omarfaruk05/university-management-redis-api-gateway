@@ -75,4 +75,4 @@ router.delete(
   SemesterRegistrationController.deleteByIdFromDB
 );
 
-export const semesterRegistrationRoutes = router;
+export const SemesterRegistrationRoutes = router;
