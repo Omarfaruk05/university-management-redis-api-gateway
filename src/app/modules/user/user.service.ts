@@ -2,41 +2,51 @@ import { Request, Response } from 'express';
 import { FileUploadHelper } from '../../../helpers/fileUploadHelper';
 import { ICloudinaryResponse, IUploadFile } from '../../../interfaces/file';
 import { AuthService } from '../../../shared/axios';
+import { IGenericResponse } from '../../../interfaces/common';
 
-const createStudent = async (req: Request) => {
+const createStudent = async (req: Request): Promise<IGenericResponse> => {
   const file = req.file as IUploadFile;
-  const uploadedImg: ICloudinaryResponse = await FileUploadHelper.uploadToCloudinary(file);
+  const uploadedImage = await FileUploadHelper.uploadToCloudinary(file);
 
-  if (uploadedImg) {
-    req.body.profileImg = uploadedImg.secure_url;
+  if (uploadedImage) {
+    req.body.profileImage = uploadedImage.secure_url;
   }
 
-  const { academicFaculty, academicSemester, academicDepartment } = req.body.student;
-  const academicFacultyResponse = await AuthService.get(
-    `/academic-faculties?syncId=${academicFaculty}`
-  );
+  const { academicDepartment, academicFaculty, academicSemester } = req.body.student;
 
-  //   if (academicFacultyResponse.data && Array.isArray(academicFacultyResponse.data)) {
-  //     req.body.student.academicDepartment = academicFacultyResponse.data[0].id;
-  //   }
-  const academicSemesterResponse = await AuthService.get(
-    `/academic-semesters?syncId=${academicSemester}`
-  );
-
-  //   if (academicSemesterResponse.data && Array.isArray(academicSemesterResponse.data)) {
-  //     req.body.student.academicDepartment = academicSemesterResponse.data[0].id;
-  //   }
   const academicDepartmentResponse = await AuthService.get(
     `/academic-departments?syncId=${academicDepartment}`
   );
 
-  //   if (academicDepartmentResponse.data && Array.isArray(academicDepartmentResponse.data)) {
-  //     req.body.student.academicDepartment = academicDepartmentResponse.data[0].id;
-  //   }
+  if (academicDepartmentResponse.data && Array.isArray(academicDepartmentResponse.data)) {
+    req.body.student.academicDepartment = academicDepartmentResponse.data[0].id;
+  }
 
-  console.log('faculty', academicFacultyResponse);
-  console.log('department', academicDepartmentResponse);
-  console.log('semester', academicSemesterResponse);
+  const academicFacultyResponse = await AuthService.get(
+    `/academic-faculties?syncId=${academicFaculty}`
+  );
+
+  if (academicFacultyResponse.data && Array.isArray(academicFacultyResponse.data)) {
+    req.body.student.academicFaculty = academicFacultyResponse.data[0].id;
+  }
+
+  const academicSemesterResponse = await AuthService.get(
+    `/academic-semesters?syncId=${academicSemester}`
+  );
+
+  if (academicSemesterResponse.data && Array.isArray(academicSemesterResponse.data)) {
+    req.body.student.academicSemester = academicSemesterResponse.data[0].id;
+  }
+
+  const response: IGenericResponse = await AuthService.post('/users/create-student', req.body, {
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+
+  console.log(response);
+
+  return response;
 };
 
 export const UserService = {
