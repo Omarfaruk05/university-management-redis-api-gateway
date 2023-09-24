@@ -4,11 +4,12 @@ import config from '../config';
 const HttpService = (baseUrl: string): AxiosInstance => {
   const instance = axios.create({
     baseURL: baseUrl,
-    timeout: 1000,
+    timeout: 10000,
     headers: {
       'Content-Type': 'application/json'
     }
   });
+
   instance.interceptors.request.use(
     (config) => {
       return config;
