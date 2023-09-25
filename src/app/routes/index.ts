@@ -11,6 +11,7 @@ import { CourseRoutes } from '../modules/course/course.route';
 import { OfferedCourseClassScheduleRoutes } from '../modules/offeredCourseClassSchedule/offeredCourseClassSchedule.route';
 import { offeredCourseSectionRoutes } from '../modules/offeredCourseSection/offeredCourseSection.rotue';
 import { AuthenticationRoutes } from '../modules/auth/auth.route';
+import { FacultyRoutes } from '../modules/faculty/faculty.route';
 
 const router = express.Router();
 
@@ -30,6 +31,10 @@ const moduleRoutes = [
   {
     path: '/academic-departments',
     routes: AcademicDepartmentRoutes
+  },
+  {
+    path: '/faculties',
+    routes: FacultyRoutes
   },
   {
     path: '/users',
