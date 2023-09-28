@@ -15,7 +15,6 @@ router.post(
 );
 
 router.get('/', AcademicFacultyController.getAllFromDB);
-
 router.get('/:id', AcademicFacultyController.getByIdFromDB);
 
 router.patch(
