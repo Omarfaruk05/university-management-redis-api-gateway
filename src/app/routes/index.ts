@@ -13,6 +13,7 @@ import { offeredCourseSectionRoutes } from '../modules/offeredCourseSection/offe
 import { AuthenticationRoutes } from '../modules/auth/auth.route';
 import { FacultyRoutes } from '../modules/faculty/faculty.route';
 import { adminRoutes } from '../modules/admin/admin.route';
+import { managementDepartmentRoutes } from '../modules/managementDepartment/managementDepartment.route';
 
 const router = express.Router();
 
@@ -68,6 +69,10 @@ const moduleRoutes = [
   {
     path: '/offered-course-sections',
     routes: offeredCourseSectionRoutes
+  },
+  {
+    path: '/management-departments',
+    routes: managementDepartmentRoutes
   },
   {
     path: '/offered-courses',
