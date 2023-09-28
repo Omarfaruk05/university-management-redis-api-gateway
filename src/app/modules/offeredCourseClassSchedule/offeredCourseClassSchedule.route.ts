@@ -12,7 +12,7 @@ router.get('/:id', OfferedCourseClassScheduleController.getByIdFromDB);
 
 router.post(
   '/',
-  // validateRequest(OfferedCourseClassScheduleValidation.create),
+  // validateRequest(OfferedCourseClassScheduleValidation.createOfferedCourseClassSchedule),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   OfferedCourseClassScheduleController.insertIntoDB
 );
