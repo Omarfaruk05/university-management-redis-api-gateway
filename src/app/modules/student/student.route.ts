@@ -25,7 +25,7 @@ router.get('/:id', StudentController.getByIdFromDB);
 
 router.patch(
   '/:id',
-  validateRequest(StudentValidation.updateStudent),
+  validateRequest(StudentValidation.updateStudentZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
   StudentController.updateOneInDB
 );
