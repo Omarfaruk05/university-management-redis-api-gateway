@@ -14,6 +14,10 @@ import { AuthenticationRoutes } from '../modules/auth/auth.route';
 import { FacultyRoutes } from '../modules/faculty/faculty.route';
 import { adminRoutes } from '../modules/admin/admin.route';
 import { managementDepartmentRoutes } from '../modules/managementDepartment/managementDepartment.route';
+import { studentSemesterPaymentRoutes } from '../modules/studentSemesterPayment/studentSemesterPayment.route';
+import { studentEnrolledCourseMarkRoutes } from '../modules/studentEnrolledCourseMark/studentEnrolledCourseMark.route';
+import { studentEnrolledCourseRoutes } from '../modules/studentEnrolledCourse/studentEnrolledCourse.route';
+import { studentRoutes } from '../modules/student/student.route';
 
 const router = express.Router();
 
@@ -23,8 +27,16 @@ const moduleRoutes = [
     routes: AuthenticationRoutes
   },
   {
-    path: '/academic-semesters',
-    routes: AcademicSemesterRoutes
+    path: '/users',
+    routes: UserRoutes
+  },
+  {
+    path: '/faculties',
+    routes: FacultyRoutes
+  },
+  {
+    path: '/students',
+    routes: studentRoutes
   },
   {
     path: '/academic-faculties',
@@ -35,16 +47,8 @@ const moduleRoutes = [
     routes: AcademicDepartmentRoutes
   },
   {
-    path: '/faculties',
-    routes: FacultyRoutes
-  },
-  {
-    path: '/users',
-    routes: UserRoutes
-  },
-  {
-    path: '/admins',
-    routes: adminRoutes
+    path: '/academic-semesters',
+    routes: AcademicSemesterRoutes
   },
   {
     path: '/buildings',
@@ -55,28 +59,44 @@ const moduleRoutes = [
     routes: roomRoutes
   },
   {
-    path: '/semester-registrations',
-    routes: SemesterRegistrationRoutes
-  },
-  {
     path: '/courses',
     routes: CourseRoutes
   },
   {
-    path: '/offered-course-class-schedules',
-    routes: OfferedCourseClassScheduleRoutes
+    path: '/semester-registrations',
+    routes: SemesterRegistrationRoutes
+  },
+  {
+    path: '/offered-courses',
+    routes: OfferedCourseRoutes
   },
   {
     path: '/offered-course-sections',
     routes: offeredCourseSectionRoutes
   },
   {
+    path: '/offered-course-class-schedules',
+    routes: OfferedCourseClassScheduleRoutes
+  },
+  {
+    path: '/student-enrolled-courses',
+    routes: studentEnrolledCourseRoutes
+  },
+  {
+    path: '/student-enrolled-course-marks',
+    routes: studentEnrolledCourseMarkRoutes
+  },
+  {
+    path: '/student-semester-payments',
+    routes: studentSemesterPaymentRoutes
+  },
+  {
     path: '/management-departments',
     routes: managementDepartmentRoutes
   },
   {
-    path: '/offered-courses',
-    routes: OfferedCourseRoutes
+    path: '/admins',
+    routes: adminRoutes
   }
 ];
 
