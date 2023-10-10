@@ -3,7 +3,7 @@ import { IGenericResponse } from '../../../interfaces/common';
 import { AuthService, CoreService } from '../../../shared/axios';
 
 const getAllFromDB = async (req: Request): Promise<IGenericResponse> => {
-  const response: IGenericResponse = await CoreService.get('/faculties', {
+  const response: IGenericResponse = await AuthService.get('/faculties', {
     params: req.query,
     headers: {
       Authorization: req.headers.authorization
